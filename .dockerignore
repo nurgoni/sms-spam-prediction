@@ -1,0 +1,28 @@
+# Ignore Docker-specific files and directories
+.dockerignore
+.dockerignore.docker
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.pyc
+*.venv
+
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore Python-related artifacts
+__pycache__/
+*.pyc
+
+# Ignore local development files
+venv/
+*.log
+
+# Exclude specific files or directories based on your project structure
+checkpoint
+notebook
+data
