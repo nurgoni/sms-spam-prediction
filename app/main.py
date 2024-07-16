@@ -1,9 +1,9 @@
 import os
 import pickle
-import uvicorn
+# import uvicorn
 from fastapi import FastAPI
 import tensorflow as tf
-from tensorflow.keras.preprocessing.text import Tokenizer
+# from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from app import schemas
 from app import preprocessing as pp
@@ -11,10 +11,12 @@ from app import preprocessing as pp
 app = FastAPI()
 
 # Load the pre-trained TensorFlow model
-model = tf.keras.models.load_model("app/models/sms_spam_prediction.keras")
+model_path = os.getenv("MODEL_CHECKPOINT_PATH", "checkpoint/sms_spam_prediction.keras")
+model = tf.keras.models.load_model(model_path)
 
 # Load tokenizer for text processing
-with open("app/models/tokenizer.pkl", "rb") as f:
+token_path = os.getenv("TOKENIZER_PATH", "checkpoint/tokenizer.pkl")
+with open(token_path, "rb") as f:
     tokenizer = pickle.load(f)
 
 @app.post("/predict", response_model=schemas.SentimentResponse)
