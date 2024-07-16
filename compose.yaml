@@ -1,0 +1,17 @@
+version: '3.10'
+
+services:
+  ml-app:
+    build: .
+    volumes:
+      - ./checkpoint:/app/checkpoint
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_CHECKPOINT_PATH=/app/checkpoint/sms_spam_prediction.keras
+      - TOKENIZER_PATH=/app/checkpoint/tokenizer.pkl
+
+# volumes:
+#   model-checkpoints:
+#   datasets:
